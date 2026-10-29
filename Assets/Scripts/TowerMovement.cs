@@ -19,6 +19,8 @@ public class TowerMovement : MonoBehaviour
     private Transform target;         // bersaglio attuale
     private float currentPitch;       // angolo attuale della canna
 
+    public bool HasTarget => target != null;
+
     void Update()
     {
         FindTarget();

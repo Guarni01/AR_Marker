@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 563291014521954026}
   - component: {fileID: 7625911638475021472}
+  - component: {fileID: -8372208006092045945}
+  - component: {fileID: 612277137414024641}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -45,6 +47,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b586977f75e76b443a378aef311b064e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestEnemy
+  centerTag: Tower
+  orbitRadius: 8
+  orbitSpeed: 40
+  approachSpeed: 3
+  minHeight: 1
+  maxHeight: 6
+  heightSpeed: 2
+  changeTimeMin: 2
+  changeTimeMax: 5
+--- !u!136 &-8372208006092045945
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880422571977855704}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 124.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 4.43, y: 86.66, z: 0}
+--- !u!114 &612277137414024641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880422571977855704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518fac9bc4dd9c64c975cb337868c537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthTest
+  MaxHealth: 300
+  CurrentHealth: 0
+  DestroyOnDeath: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5393492436803058778
 GameObject:
   m_ObjectHideFlags: 0
