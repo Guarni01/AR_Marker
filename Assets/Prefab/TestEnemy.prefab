@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7625911638475021472}
   - component: {fileID: -8372208006092045945}
   - component: {fileID: 612277137414024641}
+  - component: {fileID: 550224355485373542}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -92,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthTest
   MaxHealth: 300
-  CurrentHealth: 0
+  CurrentHealth: 300
   DestroyOnDeath: 1
   OnDeath:
     m_PersistentCalls:
@@ -100,6 +101,22 @@ MonoBehaviour:
   OnDamaged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &550224355485373542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880422571977855704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d85473fe39beb8418711ecb25e734e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  Damage: 10
+  AttackInterval: 1
+  TowerTag: Tower
+  DieOnHit: 0
 --- !u!1 &5393492436803058778
 GameObject:
   m_ObjectHideFlags: 0
