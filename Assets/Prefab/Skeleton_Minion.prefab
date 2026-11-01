@@ -1328,9 +1328,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5823534338683773910}
   - component: {fileID: -982414395814825163}
+  - component: {fileID: 9073770834001810928}
+  - component: {fileID: -2063197899519471293}
+  - component: {fileID: -2334984287742732818}
   m_Layer: 0
   m_Name: Skeleton_Minion
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,8 +1348,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.090452, y: 0.000000051304824, z: 9.134388}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1622889129961439109}
   - {fileID: 3005766826761726855}
@@ -1377,11 +1380,82 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'upperleg.l'\n\tTransform 'upperleg.r'\n\tTransform
+    'hips'\n\tTransform 'lowerarm.r'\n\tTransform 'upperarm.l'\n\tTransform 'chest'\n\tTransform
+    'lowerarm.l'\n\tTransform 'lowerleg.r'\n\tTransform 'lowerleg.l'\n\tTransform
+    'upperleg.l'\n\tand more ...\n\tFrom animation clip 'Walking_A'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &9073770834001810928
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505160029926307769}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-2063197899519471293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505160029926307769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518fac9bc4dd9c64c975cb337868c537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthTest
+  MaxHealth: 100
+  CurrentHealth: 0
+  DestroyOnDeath: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-2334984287742732818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505160029926307769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d811aa0b0a5a1864d982fe524dffcd52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  animator: {fileID: -982414395814825163}
+  agent: {fileID: 9073770834001810928}
+  health: {fileID: -2063197899519471293}
+  defenseTag: Defense
+  defenseDetectionRadius: 4
+  targetRefreshInterval: 0.25
+  attackRange: 1.5
+  attackDamage: 10
+  attackInterval: 1.2
+  damageFromAnimationEvent: 1
+  destroyAfterDeathSeconds: 2
 --- !u!1 &6819820198922752927
 GameObject:
   m_ObjectHideFlags: 0
