@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Tower
   - Enemy
-  - Defence
+  - Defense
   layers:
   - Default
   - TransparentFX
@@ -14,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - NavMeshGround
   - 
   - 
   - 
