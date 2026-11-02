@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// Si occupa solo di creare e tracciare i nemici della partita corrente.
 /// </summary>
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Riferimenti")]
+    [Header("Configurazione")]
     [SerializeField] private GameObject enemyPrefab;
-    [Tooltip("Lista di tutti i punti disponibili. Il manager ne seleziona tre casualmente.")]
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
-
-    [Header("Spawn della partita")]
     [Min(1)] [SerializeField] private int activeSpawnPoints = 3;
-    [Tooltip("Numero minimo e massimo di nemici generati da ciascuno dei punti scelti.")]
     [SerializeField] private Vector2Int enemiesPerPointRange = new Vector2Int(1, 3);
-    [Tooltip("Secondi minimi e massimi casuali tra due spawn consecutivi.")]
     [SerializeField] private Vector2 spawnIntervalRange = new Vector2(1f, 3f);
+
+    // In AR il callback di Vuforia e la registrazione della NavMesh possono
+    // avvenire nello stesso frame. Un margine leggermente piu' ampio evita che
+    // uno Spawn Point vicino al bordo venga scartato inutilmente.
+    private const float NavMeshSampleRadius = 5f;
+    private const float SpawnScatterRadius = 1.5f;
+    private const float MinimumEnemySeparation = 1.1f;
+    private const int SpawnPositionAttempts = 8;
 
     public bool HasFinishedSpawning { get; private set; }
 
@@ -63,18 +67,75 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnRound()
     {
+        // Lascia terminare il frame in cui GameManager registra la NavMesh
+        // nella posa corrente dell'ImageTarget prima di cercare le posizioni.
+        yield return null;
+
         List<Transform> selectedPoints = SelectSpawnPoints();
         List<Transform> spawnQueue = BuildSpawnQueue(selectedPoints);
 
         foreach (Transform spawnPoint in spawnQueue)
         {
-            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            if (!TryFindFreeNavMeshPosition(spawnPoint, out Vector3 spawnPosition))
+            {
+                Debug.LogError($"SpawnManager: nessuna posizione NavMesh libera vicino al punto '{spawnPoint.name}'.", spawnPoint);
+                continue;
+            }
+
+            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, spawnPoint.rotation);
+            NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+
+            if (agent == null || !agent.Warp(spawnPosition))
+            {
+                Debug.LogError($"SpawnManager: impossibile posizionare '{enemy.name}' sulla NavMesh.", enemy);
+                Destroy(enemy);
+                continue;
+            }
+
             aliveEnemies.Add(enemy);
             yield return new WaitForSeconds(RandomRange(spawnIntervalRange, 0.05f));
         }
 
         spawnRoutine = null;
         HasFinishedSpawning = true;
+    }
+
+    private bool TryFindFreeNavMeshPosition(Transform spawnPoint, out Vector3 position)
+    {
+        for (int attempt = 0; attempt < SpawnPositionAttempts; attempt++)
+        {
+            Vector2 offset = Random.insideUnitCircle * SpawnScatterRadius;
+            Vector3 candidate = spawnPoint.position + new Vector3(offset.x, 0f, offset.y);
+
+            if (!NavMesh.SamplePosition(candidate, out NavMeshHit hit, NavMeshSampleRadius, NavMesh.AllAreas))
+                continue;
+
+            if (IsFarEnoughFromAliveEnemies(hit.position))
+            {
+                position = hit.position;
+                return true;
+            }
+        }
+
+        position = default;
+        return false;
+    }
+
+    private bool IsFarEnoughFromAliveEnemies(Vector3 candidate)
+    {
+        aliveEnemies.RemoveAll(enemy => enemy == null);
+        float minimumDistanceSqr = MinimumEnemySeparation * MinimumEnemySeparation;
+
+        foreach (GameObject enemy in aliveEnemies)
+        {
+            Vector3 difference = enemy.transform.position - candidate;
+            difference.y = 0f;
+
+            if (difference.sqrMagnitude < minimumDistanceSqr)
+                return false;
+        }
+
+        return true;
     }
 
     private List<Transform> SelectSpawnPoints()

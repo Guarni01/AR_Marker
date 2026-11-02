@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.AI.Navigation;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,11 +19,15 @@ public class GameManager : MonoBehaviour
     [Tooltip("Trasform del castello. Deve contenere HealthTest, anche in un figlio.")]
     [SerializeField] private Transform castle;
     [SerializeField] private SpawnManager spawnManager;
+    private NavMeshSurface navMeshSurface;
 
     [Header("Eventi")]
-    [SerializeField] private UnityEvent onGameStarted;
     [SerializeField] private UnityEvent onVictory;
     [SerializeField] private UnityEvent onDefeat;
+
+    [Header("Test PC")]
+    [Tooltip("Solo per test nell'Editor: avvia la partita senza attendere Vuforia.")]
+    [SerializeField] private bool startAutomaticallyForPcTest;
 
     public GameState CurrentState { get; private set; } = GameState.WaitingForCastle;
     public Transform Castle => castle;
@@ -38,12 +43,19 @@ public class GameManager : MonoBehaviour
 
         Singleton = this;
         CacheCastleHealth();
+        CacheNavMeshSurface();
     }
 
     private void OnDestroy()
     {
         if (Singleton == this)
             Singleton = null;
+    }
+
+    private void Start()
+    {
+        if (startAutomaticallyForPcTest)
+            StartGame();
     }
 
     private void Update()
@@ -69,15 +81,21 @@ public class GameManager : MonoBehaviour
             return;
 
         CacheCastleHealth();
+        CacheNavMeshSurface();
 
-        if (castle == null || castleHealth == null || spawnManager == null)
+        if (castle == null || castleHealth == null || spawnManager == null || navMeshSurface == null)
         {
-            Debug.LogError("GameManager: assegna Castle (con HealthTest) e Spawn Manager.", this);
+            Debug.LogError("GameManager: assegna Castle (con HealthTest), Spawn Manager e NavMesh Surface.", this);
             return;
         }
 
+        // In build le mesh sorgenti non sono necessariamente leggibili a runtime.
+        // Usiamo la NavMesh gia' baked nel prefab e la registriamo nella posa
+        // corrente del target Vuforia, senza tentare di ricostruirla.
+        navMeshSurface.RemoveData();
+        navMeshSurface.AddData();
+
         CurrentState = GameState.Playing;
-        onGameStarted?.Invoke();
         spawnManager.StartSpawning();
     }
 
@@ -106,6 +124,12 @@ public class GameManager : MonoBehaviour
     private void CacheCastleHealth()
     {
         castleHealth = castle != null ? castle.GetComponentInChildren<HealthTest>() : null;
+    }
+
+    private void CacheNavMeshSurface()
+    {
+        if (navMeshSurface == null && castle != null)
+            navMeshSurface = castle.GetComponentInChildren<NavMeshSurface>(true);
     }
 
 }

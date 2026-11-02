@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int IsDead = Animator.StringToHash("IsDead");
+    private const float TargetNavMeshSampleRadius = 10f;
 
     private Transform castle;
     private Transform currentTarget;
@@ -41,6 +42,7 @@ public class Enemy : MonoBehaviour
     private float nextTargetRefresh;
     private float nextAttackTime;
     private bool isDead;
+    private bool navMeshWarningShown;
 
     private void Reset()
     {
@@ -57,6 +59,13 @@ public class Enemy : MonoBehaviour
             health = GetComponent<HealthTest>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        // Piccole priorita' diverse evitano lo stallo di agenti identici nello stesso corridoio.
+        if (agent != null)
+        {
+            agent.baseOffset = 0f;
+            agent.avoidancePriority = Random.Range(40, 61);
+        }
 
         // HealthTest resta responsabile della vita; Enemy ritarda solo la distruzione
         // per lasciare visibile l'animazione Death.
@@ -156,21 +165,43 @@ public class Enemy : MonoBehaviour
 
     private void SetCastleAsTarget()
     {
-        currentTarget = castle;
         currentTargetHealth = castle != null ? castle.GetComponentInChildren<HealthTest>() : null;
+        currentTarget = currentTargetHealth != null ? currentTargetHealth.transform : castle;
     }
 
     private void MoveToTarget()
     {
         if (agent == null || !agent.isOnNavMesh)
         {
+            if (!navMeshWarningShown)
+            {
+                Debug.LogError($"Enemy: '{name}' non si trova sulla NavMesh.", this);
+                navMeshWarningShown = true;
+            }
+
+            SetWalking(false);
+            return;
+        }
+
+        // L'ImageTarget e le difese possono non essere esattamente sulla NavMesh.
+        // L'agente deve ricevere una destinazione valida, non il Transform grezzo.
+        if (!NavMesh.SamplePosition(
+                currentTarget.position,
+                out NavMeshHit targetNavMeshHit,
+                TargetNavMeshSampleRadius,
+                agent.areaMask))
+        {
             SetWalking(false);
             return;
         }
 
         agent.isStopped = false;
-        agent.SetDestination(currentTarget.position);
-        SetWalking(true);
+        agent.stoppingDistance = attackRange;
+
+        if (!agent.hasPath || (agent.destination - targetNavMeshHit.position).sqrMagnitude > 0.01f)
+            agent.SetDestination(targetNavMeshHit.position);
+
+        SetWalking(agent.pathPending || agent.remainingDistance > agent.stoppingDistance);
     }
 
     private void AttackTarget()

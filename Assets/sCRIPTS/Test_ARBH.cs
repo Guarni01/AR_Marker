@@ -6,11 +6,13 @@ public class Test_ARBH : MonoBehaviour
 
    public void FoundByTarget()
     {
-        VisualizationObject.SetActive(true);
+        if (VisualizationObject != null)
+            VisualizationObject.SetActive(true);
     }
 
     public void LostByTarget()
     {
-        VisualizationObject.SetActive(false);
+        if (VisualizationObject != null)
+            VisualizationObject.SetActive(false);
     }
 }
