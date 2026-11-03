@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/AR_scene.unity
-    guid: bf05a16975797df43b754191ce705c77
+  - enabled: 1
+    path: "Assets/Scenes/Men\xF9.unity"
+    guid: 64c352c6f8429424da009edd94ed16c7
   - enabled: 1
     path: Assets/Scenes/Test_00_Alpha.unity
     guid: 9dbd5c704f1572a4c919c4fd33837399
