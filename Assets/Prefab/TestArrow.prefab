@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   Speed: 50
-  Damage: 5
+  Damage: 25
   LifeTime: 5
   TargetTag: Enemy
 --- !u!136 &-6902545446531830584
