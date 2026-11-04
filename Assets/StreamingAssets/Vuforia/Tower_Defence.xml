@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="cannone" size="0.500000 0.697257" />
+    <ImageTarget name="balestra" size="0.500000 0.696429" />
+    <ImageTarget name="castello" size="0.500000 0.698253" />
+  </Tracking>
+</QCARConfig>

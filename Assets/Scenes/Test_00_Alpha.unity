@@ -119,6 +119,131 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &29875442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 29875446}
+  - component: {fileID: 29875445}
+  - component: {fileID: 29875444}
+  - component: {fileID: 29875443}
+  m_Layer: 0
+  m_Name: ImageTargetBallista
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &29875443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29875442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1778676317, guid: 8a9a760f95896c34689febc965510927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
+  mObserverBehaviour: {fileID: 29875445}
+  mHiddenRoot: {fileID: 0}
+  mTargetName: balestra
+  mDatasetName: Vuforia/Tower_Defence.xml
+  mCastedBehaviour: {fileID: 29875445}
+  mMeshFilter: {fileID: 0}
+  mMeshRenderer: {fileID: 0}
+--- !u!114 &29875444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29875442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VuforiaScripts::DefaultObserverEventHandler
+  StatusFilter: 1
+  UsePoseSmoothing: 0
+  AnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 3.3333333
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 3.3333333
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  OnTargetFound:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &29875445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29875442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1631628248, guid: 8a9a760f95896c34689febc965510927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetBehaviour
+  PreviewVisible: 1
+  RuntimeOcclusion: 0
+  RuntimeCollider: 0
+  mTrackableName: balestra
+  mInitializedInEditor: 1
+  mDataSetPath: Vuforia/Tower_Defence.xml
+  mAspectRatio: 1.392858
+  mImageTargetType: 0
+  mWidth: 0.5
+  mHeight: 0.696429
+  mRuntimeTexture: {fileID: 0}
+  mMotionHint: 1
+  mTrackingOptimization: 0
+  mTrackingOptimizationNeedsUpgrade: 0
+  mPreview: {fileID: 29875443}
+--- !u!4 &29875446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29875442}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.613108, y: 0.147, z: -2.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 151716567082363283}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &165923823
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +401,7 @@ PrefabInstance:
       objectReference: {fileID: 23800000, guid: 22519c3a62e1e0d47a9b8695a116f50a, type: 2}
     - target: {fileID: 7033314256016699845, guid: 79cebebd6ae6f784cb30853cd1a38f5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6801081
+      value: -0.117
       objectReference: {fileID: 0}
     - target: {fileID: 7033314256016699845, guid: 79cebebd6ae6f784cb30853cd1a38f5e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -332,12 +457,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7033314256016699845, guid: 79cebebd6ae6f784cb30853cd1a38f5e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1736390568}
-    - targetCorrespondingSourceObject: {fileID: 7033314256016699845, guid: 79cebebd6ae6f784cb30853cd1a38f5e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8918521990194907653}
-    - targetCorrespondingSourceObject: {fileID: 7033314256016699845, guid: 79cebebd6ae6f784cb30853cd1a38f5e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 151716567082363283}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3205178417400069774, guid: 79cebebd6ae6f784cb30853cd1a38f5e, type: 3}
       insertIndex: -1
@@ -683,13 +802,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: KING
+  mTrackableName: castello
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/invizimals.xml
-  mAspectRatio: 0.5
+  mDataSetPath: Vuforia/Tower_Defence.xml
+  mAspectRatio: 1.396506
   mImageTargetType: 0
-  mWidth: 1
-  mHeight: 0.5
+  mWidth: 0.5
+  mHeight: 0.698253
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -709,8 +828,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 749099821}
   mHiddenRoot: {fileID: 0}
-  mTargetName: KING
-  mDatasetName: Vuforia/invizimals.xml
+  mTargetName: castello
+  mDatasetName: Vuforia/Tower_Defence.xml
   mCastedBehaviour: {fileID: 749099821}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -1144,6 +1263,131 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460001282}
   m_CullTransparentMesh: 1
+--- !u!1 &1532379292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532379296}
+  - component: {fileID: 1532379295}
+  - component: {fileID: 1532379294}
+  - component: {fileID: 1532379293}
+  m_Layer: 0
+  m_Name: ImageTargetCannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1532379293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532379292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1778676317, guid: 8a9a760f95896c34689febc965510927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
+  mObserverBehaviour: {fileID: 1532379295}
+  mHiddenRoot: {fileID: 0}
+  mTargetName: cannone
+  mDatasetName: Vuforia/Tower_Defence.xml
+  mCastedBehaviour: {fileID: 1532379295}
+  mMeshFilter: {fileID: 0}
+  mMeshRenderer: {fileID: 0}
+--- !u!114 &1532379294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532379292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VuforiaScripts::DefaultObserverEventHandler
+  StatusFilter: 1
+  UsePoseSmoothing: 0
+  AnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 3.3333333
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 3.3333333
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  OnTargetFound:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1532379295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532379292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1631628248, guid: 8a9a760f95896c34689febc965510927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetBehaviour
+  PreviewVisible: 1
+  RuntimeOcclusion: 0
+  RuntimeCollider: 0
+  mTrackableName: cannone
+  mInitializedInEditor: 1
+  mDataSetPath: Vuforia/Tower_Defence.xml
+  mAspectRatio: 1.394514
+  mImageTargetType: 0
+  mWidth: 0.5
+  mHeight: 0.697257
+  mRuntimeTexture: {fileID: 0}
+  mMotionHint: 1
+  mTrackingOptimization: 0
+  mTrackingOptimizationNeedsUpgrade: 0
+  mPreview: {fileID: 1532379293}
+--- !u!4 &1532379296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532379292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.348, y: 0.14, z: 3.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8918521990194907653}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1698551068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1295268179220820989, guid: 79cebebd6ae6f784cb30853cd1a38f5e, type: 3}
@@ -1544,7 +1788,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1781076118}
+    m_TransformParent: {fileID: 29875446}
     m_Modifications:
     - target: {fileID: 2466306340463887169, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_Name
@@ -1552,27 +1796,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7122164
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.020943426
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.555821
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1580,7 +1824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00000008146034
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2986383670313785851, guid: 4693d0192b64e054cbaa0e8c77439e56, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1618,7 +1862,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1781076118}
+    m_TransformParent: {fileID: 1532379296}
     m_Modifications:
     - target: {fileID: 1302770439465263556, guid: aae8c7c1b9a1f8f4782c9695bed1a75b, type: 3}
       propertyPath: FireInterval
@@ -1638,15 +1882,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3485405530842565307, guid: aae8c7c1b9a1f8f4782c9695bed1a75b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.423723
+      value: 0.345
       objectReference: {fileID: 0}
     - target: {fileID: 3485405530842565307, guid: aae8c7c1b9a1f8f4782c9695bed1a75b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0409447
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 3485405530842565307, guid: aae8c7c1b9a1f8f4782c9695bed1a75b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.7958213
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 3485405530842565307, guid: aae8c7c1b9a1f8f4782c9695bed1a75b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1699,6 +1943,8 @@ SceneRoots:
   - {fileID: 1339763108}
   - {fileID: 819650421}
   - {fileID: 749099818}
+  - {fileID: 29875446}
+  - {fileID: 1532379296}
   - {fileID: 1322214638}
   - {fileID: 689403974}
   - {fileID: 799418181}
